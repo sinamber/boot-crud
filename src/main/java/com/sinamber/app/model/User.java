@@ -3,6 +3,10 @@ package com.sinamber.app.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5267482584689902883L;
 	private long id;
 	private String name;
 

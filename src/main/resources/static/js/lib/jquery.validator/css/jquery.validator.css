@@ -1,0 +1,17 @@
+/**form validation message***/
+.btn-error {
+	/* color: #b94a48; */
+	color: #d16e6c;
+	height: 14px;
+	line-height:14px;
+}
+.ico-error {
+	display: inline-block;
+	background: url(../images/sicon.gif) no-repeat -162px -18px;
+	width: 14px;
+	height: 14px;
+	vertical-align: middle;
+	margin-right: 5px;
+	_margin-top: 13px;
+	_vertical-align: baseline
+}

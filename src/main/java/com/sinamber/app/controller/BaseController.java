@@ -21,10 +21,10 @@ import com.sinamber.app.model.Constants;
 import com.sinamber.app.util.RespMsg;
 
 /**
- * @Description:控制器基类
- * @Author:XingXiao Chen
- * @Date:Sep 24, 2014
- * @Copyright: All Rights Reserved. Copyright(c) 2014
+ * @Description:BaseController
+ * @Author:Sine Chen
+ * @Date:Apr 13, 2015 8:40:27 PM
+ * @Copyright: All Rights Reserved. Copyright(c) 2015
  */
 public class BaseController {
 	protected static Logger LOG = Logger.getLogger(BaseController.class);
@@ -43,7 +43,7 @@ public class BaseController {
 	public static final int DEFAULT_PAGE_SIZE = 10;
 
 	/**
-	 * AJAX请求成功
+	 * AJAX Success with defalut message
 	 * @param msg
 	 * @return
 	 */
@@ -52,8 +52,8 @@ public class BaseController {
 	}
 
 	/**
-	 * AJAX请求成功
-	 * @param data -返回值对象
+	 * Ajax Success
+	 * @param data -return data
 	 * @return 
 	 */
 	public String ajaxSuccess(Object data) {
@@ -65,7 +65,7 @@ public class BaseController {
 	}
 
 	/**
-	 * 直接返回操作结果
+	 * ajax Resp
 	 * @param respMsg
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public class BaseController {
 	}
 
 	/**
-	 * AJAX请求失败
+	 * AJAX Fail with default msg
 	 * @return
 	 */
 	public String ajaxFail() {
@@ -82,7 +82,7 @@ public class BaseController {
 	}
 
 	/**
-	 * AJAX请求失败
+	 * AJAX Fail with custom message
 	 * @param msg
 	 * @return
 	 */
@@ -94,7 +94,7 @@ public class BaseController {
 	}
 
 	/**
-	 * AJAX请求失败，并给出指定状态
+	 * AJAX Fail
 	 * @param status
 	 * @return
 	 */
@@ -103,7 +103,7 @@ public class BaseController {
 	}
 
 	/**
-	 * AJAX请求服务器异常
+	 * AJAX ERROR
 	 * @return
 	 */
 	public String ajaxError() {
@@ -111,23 +111,7 @@ public class BaseController {
 	}
 
 	/**
-	 * 返回 500 视图
-	 * @return
-	 */
-	public String errView() {
-		return "common/error/500";
-	}
-
-	/**
-	 * 返回 500 视图
-	 * @return
-	 */
-	public String nfView() {
-		return "common/error/404";
-	}
-
-	/**
-	 * 下载Excel文件
+	 * Download Excel File
 	 * @param request
 	 * @param response
 	 * @param filePath
@@ -165,20 +149,17 @@ public class BaseController {
 
 	}
 
-	/**
-	 * 获取request对象
-	 * @return
-	 */
 	public HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 	}
 
 	/**
-	 * 处理服务器异常情况
+	 * Handle Server Exceptions
 	 * @param request
+	 * @param response
 	 * @param ex
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@ExceptionHandler
 	public String exp(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {

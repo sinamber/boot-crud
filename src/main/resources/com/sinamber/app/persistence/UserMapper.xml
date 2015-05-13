@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.sinamber.app.persistence.UserMapper">
-
 	<!-- 查询字段 -->
 	<sql id="UserColumns">
 		id,name
@@ -30,4 +29,9 @@
 		VALUES
 		( #{vo.name})
 	</insert>
+	
+	<!-- 更新记录 -->
+	<update id="update">
+		UPDATE user SET name = #{vo.name} WHERE id = #{vo.id}
+	</update>
 </mapper>

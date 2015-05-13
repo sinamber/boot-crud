@@ -19,7 +19,7 @@ public class AppInitListener implements ApplicationListener<ContextRefreshedEven
 		LOG.info("Inject ApplicationContext to SpringBeanUtil");
 		SpringBeanUtil.setContext(event.getApplicationContext());
 
-		//项目启动之后做点啥？加载缓存资源、初始化默认用户?....
+		//After Spring Container Initlized,Do something:init your app's static data、cache... 
 		initUsers();
 	}
 
@@ -34,8 +34,8 @@ public class AppInitListener implements ApplicationListener<ContextRefreshedEven
 			u.setName("Sinamber");
 			userMapper.add(u);
 
-			//再来是个用户
-			for (int i = 0; i < 5; i++) {
+			//再来一些用户呀
+			for (int i = 0; i < 100; i++) {
 				User user = new User();
 				user.setName("USER" + i);
 				userMapper.add(user);

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BOOT-CRUD</title>
+<#include "/common/css_js_bootstrap.htm">
+<script type="text/javascript">
+$(function(){
+	//set the user tab to active,i know this is really sucks...
+	$('#navbar ul li').removeClass("active");
+	$('#userTab').addClass("active");
+	
+	$('#dataTable').dataTable({
+		"ordering": false,
+        "info":     false
+	});
+});
+function deleteById(id){
+	$.ajax({
+	   type: "POST",
+	   dataType:"JSON",
+	   cache: false,
+	   url: "/user/delete/"+id,
+	   beforeSend : function(){
+       },
+	   success: function(resp){
+	   		switch (resp.status) {
+			   case 0:
+		            ui.msg('success',1);
+		            ui.reload();
+		            break;
+		        case 1:
+		            ui.msg('fail');
+		            break;
+		        case -1:
+		        	ui.msg('server error！');
+		    }
+	   },
+	   error:function(){
+	   }
+	});
+}
+</script>
+</head>
+<body>
+<#include "/common/navbar.htm">
+<div class="container">
+	<div clsss="row">
+		<div class="col-xs-12">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">USER LIST</h3>
+			  </div>
+			  <div class="panel-body">
+					<table class="table" id="dataTable">
+				      <thead>
+				        <tr>
+				          <th>ID</th>
+				          <th>NAME</th>
+				          <th width="15%">&nbsp;</th>
+				        </tr>
+				      </thead>
+				      <tbody>
+				      	<#list data_list as vo>
+				        <tr>
+				          <th>${vo.id}</th>
+				          <td>${vo.name}</td>
+				          <td>
+				          	<a href="/user/update/${vo.id}" class="btn btn-defalut btn-primary">update</a>
+				          	<a href="javascript:void(0)" class="btn btn-defalut btn-danger" onclick="deleteById(${vo.id})">delete</a>
+				          </td>
+				        </tr>
+				        </#list>
+				      </tbody>
+				    </table>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+<#include "/common/footer.htm">
+</body>
+</html>
