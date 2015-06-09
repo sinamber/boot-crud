@@ -29,7 +29,23 @@
 
 		var $modal = $(this.options.target);
 		if (!$modal.length) {
-			$modal = $('<div class="modal" id="' + this.options.target.substr(1) + '"><div class="modal-body inner"/><div class="modal-footer"><a class="btn cancel" href="#" data-dismiss="modal">cancel</a> <a href="#" class="btn btn-danger" data-action="1">yes</a></div></div>').appendTo(this.options.appendTo).hide();
+			var tpl = '<div id="' + this.options.target.substr(1) + '" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">'+
+			'  <div class="modal-dialog">'+
+			'    <div class="modal-content">'+
+			'		<div class="modal-header">'+
+			'			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>'+
+			'			<h4 class="modal-title">网页信息</h4>'+
+			'		</div>'+
+			'		<div class="modal-body" id="confirmMsg"></div>'+
+			'		<div class="modal-footer">'+
+			'			<a href="#" class="btn btn-danger" data-action="1" id="uiBoxYeapBtn">确定</a> '+
+			'			<a class="btn btn-primary cancel" href="#" data-dismiss="modal" id="uiBoxCancellBtn">取消</a>'+
+			'		</div>'+
+			'   </div>'+
+			'  </div>'+
+			'</div>';
+			$modal = $(tpl).appendTo(this.options.appendTo).hide();
+			$modal.find("#confirmMsg").html(this.options.content);
 			if (typeof this.options.action == 'function') {
 				var self = this;
 				$modal.find('[data-action]').attr('href', '#').on('click.' + pluginName, function(e) {

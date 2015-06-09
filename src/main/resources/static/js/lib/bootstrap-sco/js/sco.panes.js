@@ -34,10 +34,7 @@
 			this.$pane_wrapper.addClass(this.options.easing);
 		}
 
-		this.$pane_wrapper.on('select.' + pluginName, function(e, options, index) {
-			if (!e.namespace || e.namespace != pluginName) {
-				return;
-			}
+		this.$pane_wrapper.on('select', function(e, options, index) {
 			var  direction = 'left'
 				,type = 'next'
 				;
@@ -46,7 +43,7 @@
 				type = 'prev';
 			}
 
-			function onEnd() {
+			function onEnd(e) {
 				self.$panes.eq(options.active).removeClass('active ' + direction);
 				self.options.active = index;
 				self.$panes.eq(index).removeClass([type, direction].join(' ')).addClass('active');
@@ -72,7 +69,7 @@
 		select: function(index) {
 			if (index !== this.options.active) {
 				if (typeof this.options.onBeforeSelect != 'function' || this.options.onBeforeSelect.call(this, index) !== false) {
-					this.$pane_wrapper.trigger('select.' + pluginName, [this.options, index]);
+					this.$pane_wrapper.trigger('select', [this.options, index]);
 					return true;
 				}
 			}

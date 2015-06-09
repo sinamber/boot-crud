@@ -15,28 +15,30 @@ $(function(){
 	});
 });
 function deleteById(id){
-	$.ajax({
-	   type: "POST",
-	   dataType:"JSON",
-	   cache: false,
-	   url: "/user/delete/"+id,
-	   beforeSend : function(){
-       },
-	   success: function(resp){
-	   		switch (resp.status) {
-			   case 0:
-		            ui.msg('success',1);
-		            ui.reload();
-		            break;
-		        case 1:
-		            ui.msg('fail');
-		            break;
-		        case -1:
-		        	ui.msg('server error！');
-		    }
-	   },
-	   error:function(){
-	   }
+	ui.confirm('确定删除该记录？',function(){
+		$.ajax({
+			   type: "POST",
+			   dataType:"JSON",
+			   cache: false,
+			   url: "/user/delete/"+id,
+			   beforeSend : function(){
+		       },
+			   success: function(resp){
+			   		switch (resp.status) {
+					   case 0:
+				            ui.msg('success',1);
+				            ui.reload();
+				            break;
+				        case 1:
+				            ui.msg('fail');
+				            break;
+				        case -1:
+				        	ui.msg('server error！');
+				    }
+			   },
+			   error:function(){
+			   }
+			});
 	});
 }
 </script>

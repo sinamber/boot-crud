@@ -30,16 +30,27 @@
 		if (!$selector.length) {
 			$selector = $('<div/>', {id: $[pluginName].options.id}).appendTo($[pluginName].options.appendTo);
 		}
-		if ($[pluginName].options.animate) {
-			$selector.addClass('page_mess_animate');
-		} else {
-			$selector.removeClass('page_mess_animate');
-		}
 		$selector.html(message);
 		if (type === undefined || type == $[pluginName].TYPE_ERROR) {
-			$selector.removeClass($[pluginName].options.okClass).addClass($[pluginName].options.errClass);
+			$selector.removeClass($[pluginName].options.okClass);
+			$selector.removeClass($[pluginName].options.infoClass);
+			$selector.removeClass($[pluginName].options.warningClass);
+			$selector.addClass($[pluginName].options.errClass);
 		} else if (type == $[pluginName].TYPE_OK) {
-			$selector.removeClass($[pluginName].options.errClass).addClass($[pluginName].options.okClass);
+			$selector.removeClass($[pluginName].options.errClass);
+			$selector.removeClass($[pluginName].options.infoClass);
+			$selector.removeClass($[pluginName].options.warningClass);
+			$selector.addClass($[pluginName].options.okClass);
+		} else if (type == $[pluginName].TYPE_INFO){
+			$selector.removeClass($[pluginName].options.errClass);
+			$selector.removeClass($[pluginName].options.okClass);
+			$selector.removeClass($[pluginName].options.warningClass);
+			$selector.addClass($[pluginName].options.infoClass);
+		} else if (type == $[pluginName].TYPE_WARNING){
+			$selector.removeClass($[pluginName].options.errClass);
+			$selector.removeClass($[pluginName].options.okClass);
+			$selector.removeClass($[pluginName].options.infoClass);
+			$selector.addClass($[pluginName].options.warningClass);
 		}
 		$selector.slideDown('fast', function() {
 			$[pluginName].timeout = setTimeout(function() { $selector.slideUp('fast'); }, $[pluginName].options.delay);
@@ -49,15 +60,18 @@
 
 	$.extend($[pluginName], {
 		options: {
-			 id: 'page_message'
+			id: 'page_message'
 			,okClass: 'page_mess_ok'
 			,errClass: 'page_mess_error'
-			,animate: true
+			,infoClass: 'page_mess_info'
+			,warningClass: 'page_mess_warning'
 			,delay: 4000
 			,appendTo: 'body'	// where should the modal be appended to (default to document.body). Added for unit tests, not really needed in real life.
 		},
 
 		TYPE_ERROR: 1,
-		TYPE_OK: 2
+		TYPE_OK: 2,
+		TYPE_INFO: 3,
+		TYPE_WARNING: 4,
 	});
 })(jQuery);
