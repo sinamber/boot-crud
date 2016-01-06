@@ -19,11 +19,12 @@ public class MybatisConfig {
 		try {
 			final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 			sessionFactory.setDataSource(dataSource);
-			sessionFactory.setConfigLocation(new InputStreamResource(this.getClass().getResourceAsStream("/mybatis.xml")));
+			sessionFactory.setConfigLocation(new InputStreamResource(this.getClass().getResourceAsStream("/mybatis-config.xml")));
 			sqlSessionFactory = sessionFactory.getObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sqlSessionFactory;
 	}
+
 }
